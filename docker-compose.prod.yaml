@@ -1,0 +1,52 @@
+services:
+  # Python scraper
+  scraper:
+    container_name: Scraper
+    build: ./scraper
+    depends_on:
+      - mongo
+      - tor
+      - rabbitmq
+  # Express application
+  backend:
+    container_name: Express
+    hostname: backend
+    build:
+      context: ./backend
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+      - rabbitmq
+  # React application
+  frontend:
+    container_name: React
+    hostname: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+  # MongoDB Database
+  mongo:
+    image: mongo
+    container_name: Mongo
+    hostname: mongo
+    ports:
+      - 27017:27017
+  # Tor browser
+  tor:
+    image: dperson/torproxy
+    container_name: Tor
+    hostname: tor
+    ports:
+      - 9050:9050
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:alpine
+    container_name: RabbitMQ
+    hostname: rabbitmq
+    ports:
+      - 5672:5672

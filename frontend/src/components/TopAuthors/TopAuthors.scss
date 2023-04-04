@@ -1,0 +1,55 @@
+@import "../../style-partials/presets";
+
+.top-authors {
+	@include feature;
+	h4 {
+		margin-bottom: 0.5em;
+		font-size: 2.2rem;
+		font-weight: bold;
+		text-align: center;
+	}
+	p {
+		margin: 0.5em 0;
+		width: 100%;
+		text-align: left;
+		.author {
+			font-weight: bold;
+		}
+	}
+}
+
+@media only screen and (max-width: $tablet-width), (max-height: $tablet-height) {
+	.top-authors {
+		h4 {
+			margin-bottom: 0.4em;
+			font-size: 1.85rem;
+		}
+		p {
+			margin: 0.3em 0;
+		}
+	}
+}
+
+@media only screen and (max-width: $mobile-width) {
+	.top-authors {
+		h4 {
+			margin-bottom: 0.4em;
+			font-size: 1.7rem;
+		}
+		p {
+			margin: 0.3em 0;
+		}
+	}
+}
+
+@media only screen and (orientation: landscape) and (max-height: $mobile-height-landscape) {
+	.top-authors {
+		h4 {
+			margin-bottom: 0.4em;
+			font-size: 1.35rem;
+		}
+		p {
+			margin: 0.25em 0;
+		}
+	}
+}

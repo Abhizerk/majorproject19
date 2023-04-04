@@ -1,0 +1,103 @@
+@import "../../style-partials/variables";
+@import "../../style-partials/utilities";
+@import "../../style-partials/presets";
+
+.navbar {
+	@include flex(row, space-between, center);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: $navbar-height;
+	background-color: $feature-color;
+	font-size: 2rem;
+	font-weight: bold;
+	padding: 0.5em 1.2em;
+	box-shadow: 0 0 10px 1px black;
+	@include no-select;
+	.links {
+		@include flex(row, flex-start, center);
+		column-gap: 30px;
+		a {
+			background-color: lighten($feature-color, 13%);
+			padding: 0.2em 0.4em;
+			border-radius: 5px;
+			position: relative;
+			z-index: 1;
+			overflow: hidden;
+			& div {
+				@include size(100%, 100%);
+				@include position(absolute, 0, 0);
+				border-radius: 5px;
+				z-index: -1;
+				scale: 0;
+				background-color: $navbar-second-color;
+				transition: scale 0.4s;
+			}
+			&.active div {
+				scale: 1;
+			}
+		}
+	}
+	.notifications {
+		position: relative;
+		font-size: 1.8rem;
+		color: $navbar-second-color;
+		cursor: pointer;
+		.notifications-counter {
+			user-select: none;
+			@include flex(row, center, center);
+			@include size(18px, 18px);
+			position: absolute;
+			top: 0;
+			right: 0;
+			font-size: 0.65rem;
+			border-radius: 50%;
+			background-color: black;
+			transform: translate(30%, -30%);
+		}
+		.notifications-container {
+			position: absolute;
+			background-color: lightgray;
+			border-radius: 6px;
+			font-size: 0.9rem;
+			right: 0;
+			margin-top: 0.9em;
+			width: 300px;
+			color: black;
+			@include card-box-shadow;
+			.notification {
+				padding: 1em;
+				border-bottom: 1px solid gray;
+				white-space: pre-line;
+				&:last-of-type {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-height: $tablet-height) {
+	.navbar {
+		padding: 0.5em 1em;
+		font-size: 1.6rem;
+		height: $navbar-height-small;
+		.links {
+			column-gap: 15px;
+		}
+	}
+}
+
+@media only screen and (max-width: $mobile-width) {
+	.navbar {
+		padding: 0.5em 0.4em;
+		font-size: 1.3rem;
+		height: $navbar-height-small;
+		.links {
+			column-gap: 8px;
+			a {
+				padding: 0.2em 0.25em;
+			}
+		}
+	}
+}
